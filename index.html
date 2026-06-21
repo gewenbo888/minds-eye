@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Mind's Eye · 心灵之眼 — Reality Before Reality | 现实诞生之前</title>
+
+<!-- SEO · GEO -->
+<meta name="description" content="The Mind's Eye · 心灵之眼 — an interactive bilingual exploration of imagination, mental simulation, spatial intelligence and invention. Every machine, city and invention existed first inside a human mind. Explore mental rotation, the minds of da Vinci, Tesla and Einstein, the neuroscience of imagination, and a hands-on mental-rotation lab.">
+<meta name="keywords" content="mind's eye, spatial intelligence, mental rotation, imagination, visualization, invention, Leonardo da Vinci, Nikola Tesla, neuroscience of imagination, 心灵之眼, 空间智能, 心智旋转, 想象力">
+<meta name="author" content="Gewenbo">
+<link rel="canonical" href="https://minds-eye.psyverse.fun/">
+<link rel="alternate" hreflang="en" href="https://minds-eye.psyverse.fun/">
+<link rel="alternate" hreflang="zh-CN" href="https://minds-eye.psyverse.fun/">
+<link rel="alternate" hreflang="x-default" href="https://minds-eye.psyverse.fun/">
+<meta property="og:title" content="The Mind's Eye · 心灵之眼 — Reality Before Reality">
+<meta property="og:description" content="Every invention existed in imagination before it existed in reality. An interactive journey into spatial intelligence, mental simulation and invention.">
+<meta property="og:url" content="https://minds-eye.psyverse.fun/">
+<meta property="og:site_name" content="Psyverse">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Mind's Eye · 心灵之眼">
+<meta name="twitter:description" content="Reality Before Reality — the interactive exploration of imagination and spatial intelligence.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#060A14">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "The Mind's Eye · 心灵之眼",
+  "description": "An interactive bilingual exploration of imagination, mental simulation, spatial intelligence and invention.",
+  "url": "https://minds-eye.psyverse.fun/",
+  "inLanguage": ["en", "zh-CN"],
+  "author": { "@type": "Person", "name": "Gewenbo", "url": "https://psyverse.fun/" },
+  "publisher": { "@type": "Organization", "name": "Psyverse", "url": "https://psyverse.fun/" }
+}
+</script>
+<!-- /SEO · GEO -->
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23060A14'/><ellipse cx='16' cy='16' rx='12' ry='7' fill='none' stroke='%235BAEFF' stroke-width='1.3'/><circle cx='16' cy='16' r='4.4' fill='none' stroke='%23D9A84E' stroke-width='1.3'/><circle cx='16' cy='16' r='1.8' fill='%23B98CFF'/></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@200;300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@200;300;400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#060A14;
+  --bg2:#0A1120;
+  --blue:#5BAEFF;
+  --blue-br:#8FD2FF;
+  --sepia:#D9A84E;
+  --neuro:#B98CFF;
+  --ink:#DCE7FB;
+  --ink-soft:#9DB0D2;
+  --ink-dim:#5E6F92;
+  --line:rgba(120,170,230,0.13);
+  --accent:#5BAEFF;
+  --accent-rgb:91,174,255;
+  --grid:rgba(91,174,255,0.05);
+  --fd:'Space Grotesk',sans-serif;
+  --fb:'Sora',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --fs:'Newsreader',Georgia,serif;
+  --cn:'Noto Sans SC',sans-serif;
+  --cns:'Noto Serif SC',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-weight:300;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+html[data-lang="zh"] body{font-family:var(--cn)}
+.zh{display:none}.en{display:inline}
+html[data-lang="zh"] .zh{display:inline}
+html[data-lang="zh"] .en{display:none}
+
+/* drafting grid + canvas */
+#hero-c{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+.draft{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:46px 46px;mask:radial-gradient(120% 100% at 50% 0%,#000 30%,transparent 80%);
+  -webkit-mask:radial-gradient(120% 100% at 50% 0%,#000 30%,transparent 80%);opacity:.6}
+.vig{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 120%,rgba(6,10,20,.92),transparent 55%)}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:24px;transition:opacity 1s,visibility 1s}
+#loader.gone{opacity:0;visibility:hidden}
+.l-eye{width:96px;height:60px;position:relative}
+.l-eye svg{width:100%;height:100%}
+.l-eye .iris{transform-origin:48px 30px;animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.l-t{font-family:var(--fd);font-weight:500;font-size:clamp(16px,3vw,22px);letter-spacing:.04em;color:var(--ink)}
+.l-s{font-family:var(--fm);font-size:10px;letter-spacing:.42em;color:var(--ink-dim);text-transform:uppercase}
+
+/* top bar */
+header{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;
+  padding:16px clamp(16px,4vw,48px);background:linear-gradient(180deg,rgba(6,10,20,.9),transparent);backdrop-filter:blur(7px)}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer}
+.brand svg{width:30px;height:30px}
+.brand .nm{font-family:var(--fd);font-weight:600;font-size:15px;letter-spacing:.02em}
+.brand .nm small{display:block;font-family:var(--fm);font-size:8.5px;letter-spacing:.32em;color:var(--ink-dim);margin-top:1px}
+html[data-lang="zh"] .brand .nm{font-family:var(--cns);font-weight:600}
+.tnav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.tnav a{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);
+  text-decoration:none;padding:6px 9px;border-radius:7px;cursor:pointer;transition:.25s}
+.tnav a:hover{color:var(--ink);background:rgba(91,174,255,.08)}
+html[data-lang="zh"] .tnav a{font-family:var(--cn);letter-spacing:.04em}
+.lang{display:flex;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-left:4px}
+.lang button{background:transparent;border:0;color:var(--ink-dim);font-family:var(--fm);font-size:11px;padding:6px 11px;cursor:pointer;transition:.25s}
+.lang button.on{background:rgba(91,174,255,.18);color:var(--ink)}
+
+main{position:relative;z-index:10}
+section{position:relative;padding:clamp(60px,10vh,120px) clamp(20px,6vw,100px)}
+.wrap{max-width:1120px;margin:0 auto}
+.ey{font-family:var(--fm);font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--blue);
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+html[data-lang="zh"] .ey{font-family:var(--cn);letter-spacing:.16em}
+.ey::before{content:"";width:24px;height:1px;background:var(--blue)}
+.sec-h{font-family:var(--fd);font-weight:600;font-size:clamp(28px,5vw,56px);line-height:1.05;letter-spacing:-.01em;margin-bottom:8px}
+html[data-lang="zh"] .sec-h{font-family:var(--cns);font-weight:600}
+.sec-h .cn{font-size:.5em;color:var(--ink-soft);font-weight:300;margin-left:.5em;letter-spacing:.04em}
+html[data-lang="zh"] .sec-h .cn{display:none}
+.lede{font-size:clamp(14px,1.6vw,18px);color:var(--ink-soft);max-width:64ch;line-height:1.75;font-weight:300}
+
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:110px}
+.hero .tag{font-family:var(--fm);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:26px}
+html[data-lang="zh"] .hero .tag{font-family:var(--cn);letter-spacing:.2em}
+.hero h1{font-family:var(--fd);font-weight:700;font-size:clamp(44px,9vw,124px);line-height:.96;letter-spacing:-.03em}
+html[data-lang="zh"] .hero h1{font-family:var(--cns);font-weight:600;letter-spacing:.04em;line-height:1.1}
+.hero h1 .grad{background:linear-gradient(120deg,var(--ink) 20%,var(--blue) 60%,var(--neuro));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .rb{font-family:var(--fs);font-style:italic;font-size:clamp(18px,3vw,32px);color:var(--sepia);margin:12px 0 8px}
+html[data-lang="zh"] .hero .rb{font-family:var(--cns);font-style:normal}
+.hero p.sub{max-width:60ch;font-size:clamp(14px,1.7vw,19px);color:var(--ink-soft);font-weight:300;margin-top:18px;line-height:1.7}
+.hero .stage-label{margin-top:30px;font-family:var(--fm);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);height:14px;transition:.4s}
+.cue{margin-top:38px;font-family:var(--fm);font-size:10px;letter-spacing:.28em;color:var(--ink-dim);text-transform:uppercase}
+.cue .ln{display:block;width:1px;height:40px;margin:10px auto 0;background:linear-gradient(180deg,var(--blue),transparent);animation:cue 2s infinite}
+@keyframes cue{0%,100%{opacity:.3}50%{opacity:1}}
+
+.btn{font-family:var(--fm);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:14px 26px;border-radius:10px;
+  cursor:pointer;border:1px solid var(--line);background:rgba(91,174,255,.06);color:var(--ink);transition:.3s;display:inline-flex;align-items:center;gap:9px}
+html[data-lang="zh"] .btn{font-family:var(--cn);letter-spacing:.06em}
+.btn:hover{border-color:rgba(91,174,255,.5);box-shadow:0 0 26px rgba(91,174,255,.2);transform:translateY(-2px)}
+.btn.gold{border-color:rgba(217,168,78,.4);background:rgba(217,168,78,.08)}
+.btn.gold:hover{box-shadow:0 0 26px rgba(217,168,78,.25)}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+
+/* generic feature */
+.feature{border-top:1px solid var(--line)}
+.fh{margin-bottom:42px}
+.fh.ctr{text-align:center;max-width:760px;margin-left:auto;margin-right:auto}
+
+/* facet chips */
+.facets{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.facet{font-family:var(--fm);font-size:11px;letter-spacing:.05em;color:var(--ink-soft);border:1px solid var(--line);
+  border-radius:20px;padding:8px 15px;transition:.3s;background:rgba(91,174,255,.02)}
+html[data-lang="zh"] .facet{font-family:var(--cn)}
+.facet:hover{border-color:rgba(91,174,255,.4);color:var(--ink);transform:translateY(-2px)}
+
+/* MENTAL ROTATION LAB */
+.lab{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:stretch;margin-top:36px}
+@media(max-width:880px){.lab{grid-template-columns:1fr}}
+.lab-stage{position:relative;border:1px solid var(--line);border-radius:18px;background:rgba(10,17,32,.5);overflow:hidden;min-height:380px}
+.lab-stage canvas{display:block;width:100%;height:100%}
+.lab-divider{position:absolute;top:12%;bottom:12%;left:50%;width:1px;background:var(--line)}
+.lab-tag{position:absolute;font-family:var(--fm);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);top:14px}
+.lab-tag.l{left:16px}.lab-tag.r{right:16px}
+.lab-panel{border:1px solid var(--line);border-radius:18px;padding:26px;background:rgba(10,17,32,.5);display:flex;flex-direction:column}
+.lab-panel h4{font-family:var(--fd);font-weight:600;font-size:20px;margin-bottom:6px}
+html[data-lang="zh"] .lab-panel h4{font-family:var(--cn);font-weight:500}
+.lab-panel p{font-size:13.5px;color:var(--ink-soft);line-height:1.65;font-weight:300}
+.lab-q{font-family:var(--fs);font-style:italic;font-size:19px;color:var(--ink);margin:18px 0}
+html[data-lang="zh"] .lab-q{font-family:var(--cns);font-style:normal}
+.lab-btns{display:flex;gap:12px;margin-bottom:16px}
+.lab-btns button{flex:1;padding:14px;border-radius:11px;border:1px solid var(--line);background:rgba(91,174,255,.05);
+  color:var(--ink);font-family:var(--fm);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.25s}
+html[data-lang="zh"] .lab-btns button{font-family:var(--cn)}
+.lab-btns button:hover{border-color:rgba(91,174,255,.5)}
+.lab-feedback{min-height:24px;font-family:var(--fm);font-size:13px;letter-spacing:.04em;margin-bottom:14px}
+.lab-feedback.ok{color:#5fe0a8}.lab-feedback.no{color:#ff7a8a}
+.lab-score{display:flex;gap:22px;margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+.lab-score b{font-family:var(--fd);font-weight:600;font-size:26px;color:var(--blue);display:block}
+.lab-score span{font-family:var(--fm);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+html[data-lang="zh"] .lab-score span{font-family:var(--cn)}
+
+/* MINDS gallery */
+.minds{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:40px}
+.mind{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(10,17,32,.45);
+  transition:.4s;display:flex;flex-direction:column}
+.mind:hover{transform:translateY(-6px);border-color:rgba(91,174,255,.32);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.mind-viz{height:150px;position:relative;border-bottom:1px solid var(--line);background:rgba(6,10,20,.4)}
+.mind-viz canvas{display:block;width:100%;height:100%}
+.mind-body{padding:20px 22px 24px}
+.mind .idx{position:absolute;top:12px;right:14px;font-family:var(--fm);font-size:9px;letter-spacing:.16em;color:var(--ink-dim);z-index:2}
+.mind h3{font-family:var(--fd);font-weight:600;font-size:19px;margin-bottom:3px}
+html[data-lang="zh"] .mind h3{font-family:var(--cn);font-weight:500}
+.mind .role{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--sepia);margin-bottom:11px}
+html[data-lang="zh"] .mind .role{font-family:var(--cn)}
+.mind p{font-size:13px;color:var(--ink-soft);line-height:1.62;font-weight:300}
+.mind .topics{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.mind .topics span{font-family:var(--fm);font-size:9.5px;letter-spacing:.03em;color:var(--ink-dim);border:1px solid var(--line);border-radius:14px;padding:3px 9px}
+html[data-lang="zh"] .mind .topics span{font-family:var(--cn)}
+
+/* neuroscience regions */
+.brain-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:36px;align-items:center}
+@media(max-width:820px){.brain-grid{grid-template-columns:1fr}}
+.brain-viz{position:relative;border:1px solid var(--line);border-radius:18px;background:rgba(10,17,32,.5);aspect-ratio:1.3/1;overflow:hidden}
+.brain-viz canvas{display:block;width:100%;height:100%}
+.regions{display:flex;flex-direction:column;gap:12px}
+.region{border:1px solid var(--line);border-radius:13px;padding:16px 18px;background:rgba(91,174,255,.02);transition:.3s;cursor:default}
+.region:hover{border-color:rgba(91,174,255,.4);background:rgba(91,174,255,.05)}
+.region h4{font-family:var(--fd);font-weight:600;font-size:16px;margin-bottom:4px;display:flex;align-items:center;gap:9px}
+html[data-lang="zh"] .region h4{font-family:var(--cn);font-weight:500}
+.region .dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.region p{font-size:12.5px;color:var(--ink-soft);line-height:1.55;font-weight:300}
+
+/* spectrum bars */
+.spectrum{margin-top:38px;display:flex;flex-direction:column;gap:14px}
+.sb{display:grid;grid-template-columns:160px 1fr 48px;align-items:center;gap:16px}
+@media(max-width:640px){.sb{grid-template-columns:110px 1fr 40px;gap:10px}}
+.sb .sbn{font-family:var(--fm);font-size:11.5px;letter-spacing:.04em;color:var(--ink-soft)}
+html[data-lang="zh"] .sb .sbn{font-family:var(--cn)}
+.sb .sbt{height:8px;border-radius:6px;background:rgba(255,255,255,.05);overflow:hidden}
+.sb .sbt i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--blue),var(--neuro));width:0;transition:width 1.3s cubic-bezier(.16,.84,.34,1)}
+.sb .sbv{font-family:var(--fm);font-size:12px;color:var(--blue);text-align:right}
+
+/* invention engine flow */
+.flow{display:flex;flex-wrap:wrap;gap:10px;margin-top:38px;align-items:stretch;justify-content:center}
+.flow-step{flex:1;min-width:120px;border:1px solid var(--line);border-radius:13px;padding:18px 14px;background:rgba(10,17,32,.45);
+  text-align:center;cursor:pointer;transition:.3s;position:relative}
+.flow-step:hover,.flow-step.on{border-color:rgba(217,168,78,.5);background:rgba(217,168,78,.07);transform:translateY(-4px)}
+.flow-step .fn{font-family:var(--fm);font-size:9px;letter-spacing:.16em;color:var(--ink-dim)}
+.flow-step .ft{font-family:var(--fd);font-weight:600;font-size:15px;margin-top:6px}
+html[data-lang="zh"] .flow-step .ft{font-family:var(--cn);font-weight:500}
+.flow-detail{margin-top:22px;border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:rgba(10,17,32,.4);min-height:80px}
+.flow-detail p{font-size:14px;color:var(--ink-soft);line-height:1.7;font-weight:300}
+
+/* timeline */
+.timeline{margin-top:40px;position:relative;padding-left:8px}
+.tl-axis{position:absolute;left:26px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--blue),var(--neuro),transparent)}
+.tl-item{position:relative;padding:0 0 28px 66px;opacity:.4;transition:.5s}
+.tl-item.in{opacity:1}
+.tl-item .nd{position:absolute;left:18px;top:5px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid var(--blue);transition:.5s}
+.tl-item.in .nd{background:var(--blue);box-shadow:0 0 16px var(--blue)}
+.tl-item .yr{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;color:var(--blue);text-transform:uppercase}
+.tl-item h4{font-family:var(--fd);font-weight:600;font-size:19px;margin:3px 0}
+html[data-lang="zh"] .tl-item h4{font-family:var(--cn);font-weight:500}
+.tl-item p{font-size:13px;color:var(--ink-soft);font-weight:300;max-width:60ch}
+
+/* future cards */
+.fcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:38px}
+.fcard{border:1px solid var(--line);border-radius:15px;padding:24px;background:rgba(10,17,32,.45);transition:.4s}
+.fcard:hover{transform:translateY(-5px);border-color:rgba(185,140,255,.4)}
+.fcard .fi{font-size:26px;margin-bottom:12px}
+.fcard h4{font-family:var(--fd);font-weight:600;font-size:17px;margin-bottom:7px}
+html[data-lang="zh"] .fcard h4{font-family:var(--cn);font-weight:500}
+.fcard p{font-size:13px;color:var(--ink-soft);line-height:1.6;font-weight:300}
+
+/* knowledge graph */
+#kgWrap{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:rgba(8,13,26,.5);height:min(72vh,640px);margin-top:36px}
+#kg{display:block;width:100%;height:100%;cursor:grab}
+.kg-readout{position:absolute;left:18px;bottom:18px;width:min(330px,76vw);background:rgba(8,13,26,.85);border:1px solid var(--line);
+  border-radius:13px;padding:16px 18px;backdrop-filter:blur(8px);pointer-events:none;transition:.3s}
+.kg-readout h4{font-family:var(--fd);font-weight:600;font-size:17px;margin-bottom:5px}
+html[data-lang="zh"] .kg-readout h4{font-family:var(--cn);font-weight:500}
+.kg-readout p{font-size:12.5px;color:var(--ink-soft);line-height:1.55;font-weight:300}
+.kg-hint{position:absolute;right:18px;top:16px;font-family:var(--fm);font-size:9.5px;letter-spacing:.14em;color:var(--ink-dim);text-transform:uppercase}
+html[data-lang="zh"] .kg-hint{font-family:var(--cn)}
+
+/* AI guide */
+.guide{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;margin-top:38px;align-items:start}
+@media(max-width:820px){.guide{grid-template-columns:1fr}}
+.gqs{display:flex;flex-direction:column;gap:9px}
+.gqs button{text-align:left;background:rgba(91,174,255,.02);border:1px solid var(--line);color:var(--ink-soft);
+  font-family:inherit;font-size:13.5px;padding:14px 17px;border-radius:11px;cursor:pointer;transition:.3s;line-height:1.4}
+.gqs button:hover{border-color:rgba(91,174,255,.4);color:var(--ink)}
+.gqs button.on{background:rgba(91,174,255,.08);border-color:rgba(91,174,255,.5);color:var(--ink)}
+.gans{border:1px solid var(--line);border-radius:16px;padding:28px;background:rgba(10,17,32,.5);min-height:230px}
+.gans .gb{display:flex;align-items:center;gap:8px;margin-bottom:16px;font-family:var(--fm);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+.gans .gb i{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 9px var(--blue)}
+html[data-lang="zh"] .gans .gb{font-family:var(--cn)}
+.gans h4{font-family:var(--fd);font-weight:600;font-size:21px;margin-bottom:13px;line-height:1.25}
+html[data-lang="zh"] .gans h4{font-family:var(--cn);font-weight:500}
+.gans p{color:var(--ink-soft);font-size:14px;line-height:1.78;font-weight:300}
+.gnote{margin-top:15px;font-family:var(--fm);font-size:9.5px;letter-spacing:.08em;color:var(--ink-dim)}
+html[data-lang="zh"] .gnote{font-family:var(--cn)}
+
+/* final */
+.final{text-align:center;min-height:84vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.final h2{font-family:var(--fs);font-style:italic;font-weight:300;font-size:clamp(26px,4.6vw,52px);line-height:1.3;max-width:20ch}
+html[data-lang="zh"] .final h2{font-family:var(--cns);font-style:normal;font-weight:600}
+.final p{margin-top:24px;max-width:58ch;font-size:clamp(14px,1.7vw,19px);color:var(--ink-soft);font-weight:300;line-height:1.8}
+.final .mk{margin-top:40px;font-family:var(--fm);font-size:10px;letter-spacing:.3em;color:var(--blue);text-transform:uppercase}
+
+footer{position:relative;z-index:10;border-top:1px solid var(--line);padding:28px clamp(20px,6vw,100px);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--fm);font-size:10.5px;
+  letter-spacing:.12em;color:var(--ink-dim);text-transform:uppercase}
+footer a{color:var(--blue);text-decoration:none}
+html[data-lang="zh"] footer{font-family:var(--cn);letter-spacing:.04em}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,.84,.34,1),transform .9s cubic-bezier(.16,.84,.34,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.iris{animation:none}}
+::selection{background:rgba(91,174,255,.28);color:#fff}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="l-eye"><svg viewBox="0 0 96 60"><ellipse cx="48" cy="30" rx="40" ry="22" fill="none" stroke="#5BAEFF" stroke-width="1.4"/><g class="iris"><circle cx="48" cy="30" r="13" fill="none" stroke="#D9A84E" stroke-width="1.4"/><circle cx="48" cy="30" r="5" fill="#B98CFF"/><line x1="48" y1="8" x2="48" y2="14" stroke="#5BAEFF" stroke-width="1.2"/></g></svg></div>
+  <div class="l-t"><span class="en">The Mind's Eye</span><span class="zh">心灵之眼</span></div>
+  <div class="l-s">CONSTRUCTING IMAGINATION · 构建想象</div>
+</div>
+
+<canvas id="hero-c"></canvas>
+<div class="draft"></div>
+<div class="vig"></div>
+
+<header>
+  <div class="brand" onclick="scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 32 32"><ellipse cx="16" cy="16" rx="13" ry="7.5" fill="none" stroke="#5BAEFF" stroke-width="1.3"/><circle cx="16" cy="16" r="4.6" fill="none" stroke="#D9A84E" stroke-width="1.3"/><circle cx="16" cy="16" r="1.9" fill="#B98CFF"/></svg>
+    <div class="nm"><span class="en">The Mind's Eye</span><span class="zh">心灵之眼</span><small>REALITY BEFORE REALITY</small></div>
+  </div>
+  <div class="tnav">
+    <a onclick="go('rotation')"><span class="en">Rotation Lab</span><span class="zh">旋转实验室</span></a>
+    <a onclick="go('minds')"><span class="en">The Minds</span><span class="zh">众心智</span></a>
+    <a onclick="go('graph')"><span class="en">Graph</span><span class="zh">知识图谱</span></a>
+    <a onclick="go('guide')"><span class="en">AI Guide</span><span class="zh">AI 向导</span></a>
+    <div class="lang"><button id="le" class="on" onclick="setLang('en')">EN</button><button id="lz" onclick="setLang('zh')">中</button></div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="tag"><span class="en">The Science of Seeing What Does Not Yet Exist</span><span class="zh">「看见尚未存在之物」的科学</span></div>
+    <h1><span class="grad en">THE MIND'S EYE</span><span class="grad zh">心灵之眼</span></h1>
+    <div class="rb"><span class="en">Reality Before Reality</span><span class="zh">现实诞生之前</span></div>
+    <p class="sub"><span class="en">Every invention existed in imagination before it existed in reality. This is an interactive journey into spatial intelligence, mental simulation, and the minds that build worlds before building them.</span><span class="zh">每一项发明，都先诞生于想象之中，然后才诞生于现实。这是一趟深入空间智能、心智模拟，以及那些「先在脑中、后在世上」建造世界的心灵的交互旅程。</span></p>
+    <div class="stage-label" id="stageLabel"></div>
+    <div class="cta">
+      <button class="btn gold" onclick="go('rotation')"><span class="en">◳ Enter the Rotation Lab</span><span class="zh">◳ 进入旋转实验室</span></button>
+      <button class="btn" onclick="go('what')"><span class="en">Begin the Journey ↓</span><span class="zh">开始旅程 ↓</span></button>
+    </div>
+    <div class="cue"><span class="en">Scroll</span><span class="zh">向下滚动</span><span class="ln"></span></div>
+  </section>
+
+  <!-- §1 WHAT IS SPATIAL INTELLIGENCE -->
+  <section class="feature" id="what">
+    <div class="wrap reveal">
+      <div class="ey"><span class="en">Section 01 · The Faculty</span><span class="zh">第 01 节 · 这项能力</span></div>
+      <h2 class="sec-h"><span class="en">What Is Spatial Intelligence<span class="cn">空间智能</span></span><span class="zh">什么是空间智能</span></h2>
+      <p class="lede"><span class="en">Spatial intelligence is the mind's power to build, hold, and manipulate objects that have no physical form — to rotate a machine in the dark of the skull, to watch gears turn that were never cast. It is the workshop where every invention is first assembled.</span><span class="zh">空间智能，是心灵建造、保持并操控「没有物理形态之物」的能力——在颅骨的黑暗中旋转一台机器，看着从未被铸造过的齿轮转动。它，是每一项发明最初被组装起来的工坊。</span></p>
+      <div class="facets" id="facets"></div>
+    </div>
+  </section>
+
+  <!-- §2 MENTAL ROTATION LAB -->
+  <section class="feature" id="rotation">
+    <div class="wrap">
+      <div class="fh reveal">
+        <div class="ey"><span class="en">Section 02 · Interactive</span><span class="zh">第 02 节 · 交互</span></div>
+        <h2 class="sec-h"><span class="en">The Mental Rotation Lab<span class="cn">心智旋转实验室</span></span><span class="zh">心智旋转实验室</span></h2>
+        <p class="lede"><span class="en">The classic test of spatial cognition. Two objects float in space. Are they the same object seen from a different angle — or a mirror image that can never be rotated to match? Decide with your mind's eye.</span><span class="zh">这是空间认知的经典测验。两个物体悬浮于空间之中。它们是同一物体的不同视角——还是一个永远无法旋转重合的镜像？用你的心灵之眼，做出判断。</span></p>
+      </div>
+      <div class="lab reveal">
+        <div class="lab-stage">
+          <div class="lab-divider"></div>
+          <div class="lab-tag l"><span class="en">Reference</span><span class="zh">参照</span></div>
+          <div class="lab-tag r"><span class="en">Candidate</span><span class="zh">候选</span></div>
+          <canvas id="rotCanvas"></canvas>
+        </div>
+        <div class="lab-panel">
+          <h4><span class="en">Same, or Mirror?</span><span class="zh">相同，还是镜像？</span></h4>
+          <p><span class="en">Mentally rotate the right object to see if it can be made to match the left. If it can — they are the SAME. If no rotation will ever align them — it is a MIRROR.</span><span class="zh">在心中旋转右侧物体，看它能否与左侧重合。若能，它们便「相同」；若任何旋转都无法使其对齐，那它便是「镜像」。</span></p>
+          <div class="lab-q" id="rotQ"></div>
+          <div class="lab-btns">
+            <button onclick="rotAnswer(true)"><span class="en">◎ Same</span><span class="zh">◎ 相同</span></button>
+            <button onclick="rotAnswer(false)"><span class="en">⬡ Mirror</span><span class="zh">⬡ 镜像</span></button>
+          </div>
+          <div class="lab-feedback" id="rotFb"></div>
+          <div class="lab-score">
+            <div><b id="rotStreak">0</b><span class="en">Streak</span><span class="zh">连对</span></div>
+            <div><b id="rotAcc">—</b><span class="en">Accuracy</span><span class="zh">准确率</span></div>
+            <div><b id="rotN">0</b><span class="en">Trials</span><span class="zh">次数</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §3-12 THE MINDS -->
+  <section class="feature" id="minds">
+    <div class="wrap">
+      <div class="fh ctr reveal">
+        <div class="ey" style="justify-content:center"><span class="en">Sections 03–12 · The Gallery of Minds</span><span class="zh">第 03–12 节 · 心智长廊</span></div>
+        <h2 class="sec-h"><span class="en">Ten Minds That Saw First</span><span class="zh">十种先看见的心智</span></h2>
+        <p class="lede" style="margin:0 auto"><span class="en">Inventors, engineers, architects, scientists, masters of the board and the machine — each builds a private reality before the public one. Step through the workshops behind their eyes.</span><span class="zh">发明家、工程师、建筑师、科学家、棋盘与机器的大师——每一位，都在公共的现实之前，先建造一座私人的现实。让我们走进他们眼睛背后的工坊。</span></p>
+      </div>
+      <div class="minds" id="minds"></div>
+    </div>
+  </section>
+
+  <!-- §13 NEUROSCIENCE -->
+  <section class="feature" id="neuro">
+    <div class="wrap">
+      <div class="fh reveal">
+        <div class="ey"><span class="en">Section 13 · Inside the Skull</span><span class="zh">第 13 节 · 颅骨之内</span></div>
+        <h2 class="sec-h"><span class="en">The Neuroscience of Imagination<span class="cn">想象力神经科学</span></span><span class="zh">想象力神经科学</span></h2>
+        <p class="lede"><span class="en">When you imagine, your brain reuses the very machinery of perception. To picture a rotating cube is to drive the visual and parietal cortex as if you were truly seeing it. Imagination is perception, run in reverse.</span><span class="zh">当你想象时，大脑重新调用了知觉本身的机器。在脑中描绘一个旋转的立方体，就是在驱动视觉皮层与顶叶皮层——仿佛你真的看见了它。想象，是被反向运行的知觉。</span></p>
+      </div>
+      <div class="brain-grid reveal">
+        <div class="brain-viz"><canvas id="brainCanvas"></canvas></div>
+        <div class="regions" id="regions"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §14 SPECTRUM -->
+  <section class="feature" id="spectrum">
+    <div class="wrap">
+      <div class="fh reveal">
+        <div class="ey"><span class="en">Section 14 · Variation</span><span class="zh">第 14 节 · 个体差异</span></div>
+        <h2 class="sec-h"><span class="en">The Spectrum of Spatial Ability<span class="cn">空间能力光谱</span></span><span class="zh">空间能力光谱</span></h2>
+        <p class="lede"><span class="en">Spatial ability varies enormously between people — yet, crucially, it is trainable. Practice measurably moves you up this scale. The mind's eye is a muscle.</span><span class="zh">空间能力，在人与人之间差异巨大——但至关重要的是，它可以被训练。练习能切实地把你在这条标尺上向上推移。心灵之眼，是一块肌肉。</span></p>
+      </div>
+      <div class="spectrum reveal" id="spectrum"></div>
+    </div>
+  </section>
+
+  <!-- §15 + §16 TRAINING + INVENTION ENGINE -->
+  <section class="feature" id="engine">
+    <div class="wrap">
+      <div class="fh reveal">
+        <div class="ey"><span class="en">Sections 15–16 · From Thought to Thing</span><span class="zh">第 15–16 节 · 从念头到造物</span></div>
+        <h2 class="sec-h"><span class="en">The Invention Engine<span class="cn">发明引擎</span></span><span class="zh">发明引擎</span></h2>
+        <p class="lede"><span class="en">Every object around you completed the same journey — a path that begins in pure imagination and ends in civilization. Step through it. (And the Rotation Lab above is your training ground — accuracy rises with practice.)</span><span class="zh">你周围的每一件物品，都走过了同一段旅程——一条始于纯粹想象、终于文明的路径。逐步走过它。（上方的旋转实验室，就是你的训练场——准确率会随练习而上升。）</span></p>
+      </div>
+      <div class="reveal">
+        <div class="flow" id="flow"></div>
+        <div class="flow-detail"><p id="flowDetail"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §17 HISTORY -->
+  <section class="feature" id="history">
+    <div class="wrap">
+      <div class="fh reveal">
+        <div class="ey"><span class="en">Section 17 · The Long Arc</span><span class="zh">第 17 节 · 漫长的弧线</span></div>
+        <h2 class="sec-h"><span class="en">The History of Human Imagination<span class="cn">人类想象力史</span></span><span class="zh">人类想象力史</span></h2>
+        <p class="lede"><span class="en">Every leap of civilization was first a leap of imagination — a tool, a field, a city seen before it was made.</span><span class="zh">文明的每一次跃迁，都首先是一次想象的跃迁——一件工具、一片田野、一座城市，都先被看见，而后被造就。</span></p>
+      </div>
+      <div class="timeline reveal" id="timeline"><div class="tl-axis"></div></div>
+    </div>
+  </section>
+
+  <!-- §18 FUTURE -->
+  <section class="feature" id="future">
+    <div class="wrap">
+      <div class="fh reveal">
+        <div class="ey"><span class="en">Section 18 · What Comes Next</span><span class="zh">第 18 节 · 接下来</span></div>
+        <h2 class="sec-h"><span class="en">The Future of Human Imagination<span class="cn">未来想象力</span></span><span class="zh">未来想象力</span></h2>
+        <p class="lede"><span class="en">New instruments are extending the mind's eye beyond the skull. Soon we may imagine in ways no human ever has.</span><span class="zh">新的工具，正将心灵之眼延伸到颅骨之外。或许不久，我们将以任何人类都未曾有过的方式去想象。</span></p>
+      </div>
+      <div class="fcards reveal" id="future"></div>
+    </div>
+  </section>
+
+  <!-- KNOWLEDGE GRAPH -->
+  <section class="feature" id="graph">
+    <div class="wrap">
+      <div class="fh ctr reveal">
+        <div class="ey" style="justify-content:center"><span class="en">The Imagination Knowledge Graph</span><span class="zh">想象力知识图谱</span></div>
+        <h2 class="sec-h"><span class="en">Everything Is Connected</span><span class="zh">万物相连</span></h2>
+        <p class="lede" style="margin:0 auto"><span class="en">Neuroscience, psychology, engineering, design, mathematics, AI — the mind's eye is the hidden thread running through them all. Hover a node.</span><span class="zh">神经科学、心理学、工程、设计、数学、人工智能——心灵之眼，是贯穿其中的那根隐线。悬停任一节点。</span></p>
+      </div>
+      <div id="kgWrap" class="reveal">
+        <canvas id="kg"></canvas>
+        <div class="kg-readout" id="kgReadout"></div>
+        <div class="kg-hint"><span class="en">hover · drag to explore</span><span class="zh">悬停 · 拖动探索</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI GUIDE -->
+  <section class="feature" id="guide">
+    <div class="wrap">
+      <div class="fh ctr reveal">
+        <div class="ey" style="justify-content:center"><span class="en">The AI Mind Guide</span><span class="zh">AI 心智向导</span></div>
+        <h2 class="sec-h"><span class="en">Ask the Mind's Eye</span><span class="zh">向心灵之眼提问</span></h2>
+        <p class="lede" style="margin:0 auto"><span class="en">A curated, multidisciplinary companion to the deepest questions about imagination and visualization.</span><span class="zh">一位精心编纂的跨学科向导，回答关于想象与视觉化的最深问题。</span></p>
+      </div>
+      <div class="guide reveal">
+        <div class="gqs" id="gqs"></div>
+        <div class="gans" id="gans"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final">
+    <div class="wrap reveal">
+      <h2><span class="en">"The human mind is the first workshop of civilization."</span><span class="zh">「人类大脑，是文明最早的工厂。」</span></h2>
+      <p><span class="en">Every machine, city, invention, and civilization existed first in imagination. Reality is often the delayed manifestation of thought.</span><span class="zh">每一台机器、每一座城市、每一项发明与文明成果，都曾首先存在于想象之中。现实，往往只是思想的延迟显现。</span></p>
+      <div class="mk">心灵之眼 · THE MIND'S EYE</div>
+    </div>
+  </section>
+
+  <footer>
+    <div><span class="en">The Mind's Eye · 心灵之眼 — an interactive exploration of imagination &amp; spatial intelligence</span><span class="zh">心灵之眼 — 想象力与空间智能的交互探索</span></div>
+    <div><span class="en">Part of the</span><span class="zh">隶属于</span> <a href="https://psyverse.fun" target="_blank" rel="noopener">Psyverse</a></div>
+  </footer>
+</main>
+
+<script>
+"use strict";
+function rgba(r,g,b,a){return "rgba("+(r|0)+","+(g|0)+","+(b|0)+","+a+")";}
+function hexToRgb(h){h=h.replace("#","");return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)];}
+function clamp(v,a,b){return v<a?a:(v>b?b:v);}
+var TAU=Math.PI*2;
+var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var C={blue:[91,174,255],bluebr:[143,210,255],sepia:[217,168,78],neuro:[185,140,255],ink:[220,231,251]};
+
+var lang="en";
+function setLang(l){lang=l;document.documentElement.setAttribute("data-lang",l);
+  document.getElementById("le").classList.toggle("on",l==="en");
+  document.getElementById("lz").classList.toggle("on",l==="zh");
+  renderGuide(curGuide); if(kgActive>=0) kgReadout(kgActive); renderFlow(flowCur);}
+function go(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:"smooth"});}
+function bil(en,zh){return '<span class="en">'+en+'</span><span class="zh">'+zh+'</span>';}
+
+/* ============ data ============ */
+var FACETS=[["Mental Rotation","心智旋转"],["Spatial Visualization","空间视觉化"],["Mental Simulation","心智模拟"],["Engineering Imagination","工程想象"],["3D Cognition","三维认知"]];
+
+var MINDS=[
+ ["03","The Inventor","发明家","Sees the future first","抢先看见未来","The inventor holds an absence in mind — a problem with no object yet — and grows a solution inward until it is ready to be born outward.","发明家在心中持守着一种「缺席」——一个尚无对应之物的问题——并在内部培育出一个解决方案，直到它准备好向外诞生。",["Problem-finding","Synthesis","Foresight"],["发现问题","综合","远见"],"invent"],
+ ["04","Leonardo da Vinci","列奥纳多·达·芬奇","Imagined centuries ahead","想象了数个世纪","Flying machines, gears, and anatomies filled his notebooks centuries before any could be built. He saw the body and the machine as one continuous mechanism.","飞行器、齿轮与解剖图，在任何人能将其造出的数百年前，便已填满他的笔记本。他将身体与机器，视为同一台连续的机械。",["Flying Machines","Hydraulics","Anatomy"],["飞行器","水力学","解剖学"],"davinci"],
+ ["05","Nikola Tesla","尼古拉·特斯拉","Built machines in his mind","在脑中建造机器","Tesla reportedly assembled, ran, and even wore-out machines entirely in imagination — testing each design mentally before a single part was forged.","据说，特斯拉能完全在想象中组装、运转、甚至「磨损」机器——在任何一个零件被锻造之前，就先在脑中测试每一项设计。",["Mental Prototyping","Electromagnetism","Visualization"],["心智原型","电磁学","视觉化"],"tesla"],
+ ["06","The Engineer","工程师","Simulates before building","先模拟，后建造","Engineers run virtual models in the head and on screen — stresses, flows, failures — so that physical reality meets a design already tested a thousand times.","工程师在脑中与屏幕上运行虚拟模型——应力、流动、失效——使物理现实，迎接一个早已被测试千遍的设计。",["Mechanical","Aerospace","Systems"],["机械","航天","系统"],"engineer"],
+ ["07","The Architect","建筑师","Walks unbuilt buildings","漫步未建之楼","The architect strolls through rooms that do not exist, turning to feel the light, before a single stone is laid. Space is their native language.","建筑师在尚不存在的房间中漫步，转身去感受光线——而这一切，都发生在第一块石头被砌下之前。空间，是他们的母语。",["Blueprints","Structures","Urban Design"],["蓝图","结构","城市设计"],"architect"],
+ ["08","The Scientist","科学家","Rides beams of light","骑乘光束","Einstein imagined riding alongside a beam of light. The thought experiment — a simulation run in pure imagination — reshaped our picture of reality.","爱因斯坦想象自己与一束光并肩飞驰。这个思想实验——一场在纯粹想象中运行的模拟——重塑了我们对现实的图景。",["Thought Experiments","Models","Visualization"],["思想实验","模型","视觉化"],"scientist"],
+ ["09","The Chess Master","棋手","Sees moves unmade","看见未落之子","Grandmasters hold the board in mind and play forward — branching futures, pruning thousands of lines to the few that matter. They see the unmade move.","大师们在心中持守整盘棋局，并向前推演——分叉的未来，将成千上万条变化剪枝至寥寥几条关键。他们，看见尚未落下的棋子。",["Simulation","Pattern","Search Trees"],["模拟","模式","搜索树"],"chess"],
+ ["10","The Programmer","程序员","Builds invisible structures","建造无形的结构","Software has no shape, yet the programmer holds towering invisible architectures in mind — data flowing, systems calling systems, all unseen.","软件没有形状，可程序员却在心中持守着高耸的、无形的architectures——数据在流动，系统在调用系统，一切皆不可见。",["Mental Models","Architecture","Systems"],["心智模型","架构","系统"],"programmer"],
+ ["11","The Urban Planner","城市规划师","Designs whole cities","设计整座城市","Before a city rises, someone imagines its arteries and lungs — the flow of millions, the rhythm of a place that does not yet exist.","在一座城市拔地而起之前，总有人先想象它的动脉与肺叶——数百万人的流动，一处尚不存在之地的节奏。",["Spatial Planning","Flow","Systems"],["空间规划","流动","系统"],"city"],
+ ["12","The Future Machine","未来机器","Exists only as concept","仅存于概念","Fusion reactors, space elevators, Dyson swarms, interstellar ships — they live today only in the mind's eye, waiting for reality to catch up.","聚变堆、太空电梯、戴森群、星际飞船——它们今日只活在心灵之眼中，等待现实，迎头赶上。",["Fusion","Space Elevators","Dyson Swarms"],["聚变","太空电梯","戴森群"],"future"]
+];
+
+var REGIONS=[
+ ["Visual Cortex","视觉皮层","#5BAEFF","Re-renders imagined images using the same neurons that process real sight.","用处理真实视觉的同一批神经元，重新渲染想象出的图像。"],
+ ["Parietal Cortex","顶叶皮层","#B98CFF","Performs the mental rotations and spatial transforms — the engine of 3D thought.","执行心智旋转与空间变换——三维思维的引擎。"],
+ ["Prefrontal Cortex","前额叶皮层","#D9A84E","Holds the plan, directs the simulation, and keeps the imagined scene on task.","持守计划、指挥模拟，并使想象的场景紧扣目标。"],
+ ["Working Memory","工作记忆","#5FE0A8","The mental workbench — a few items held vivid and manipulable at once.","心智的工作台——少数项目，同时被鲜活地持守与操控。"],
+ ["Hippocampus","海马体","#FF8FA6","Recombines memories into scenes never lived — imagining the future from the past.","将记忆重组为从未经历的场景——以过往，想象未来。"]
+];
+
+var SPECTRUM=[
+ ["Low Visualization","低视觉化",18,"#5E6F92"],
+ ["Average Population","普通人群",42,"#5BAEFF"],
+ ["Engineers","工程师",68,"#6FB6FF"],
+ ["Architects","建筑师",76,"#8FA8FF"],
+ ["Inventors","发明家",86,"#A593FF"],
+ ["Elite Visual Thinkers","顶级视觉思考者",97,"#B98CFF"]
+];
+
+var FLOW=[
+ ["01","Imagination","想象","It begins as a felt possibility — a shape, a motion, a 'what if' with no name yet, glimpsed in the mind's eye.","它始于一种被感知到的可能性——一个形状、一段运动、一个尚无名字的「假如」，在心灵之眼中一闪而过。"],
+ ["02","Concept","概念","The glimpse is named and bounded. The idea becomes something you can hold, turn over, and describe to another mind.","那一闪被命名、被界定。这念头，成为你能持守、能翻转、能向另一个心灵描述之物。"],
+ ["03","Sketch","草图","Thought leaks onto paper. The first external trace — rough, wrong, alive — lets the eye correct what the mind alone could not.","思想渗到纸上。第一道外部痕迹——粗糙、错误、却鲜活——让眼睛去修正那心灵独自无法修正之物。"],
+ ["04","Model","模型","A digital or physical twin. Now the design can be measured, stressed, and simulated — tested against reality's rules.","一个数字或物理的孪生体。如今，这设计可被测量、施压、模拟——以现实的规则加以检验。"],
+ ["05","Prototype","原型","The first real instance. It fails in ways no simulation predicted, and teaches what only matter can teach.","第一个真实的实例。它以任何模拟都未曾预言的方式失败，并教给你唯有物质才能教授之事。"],
+ ["06","Product","产品","Refined, reliable, reproducible. The private vision becomes a public object, owned and used by strangers.","精炼、可靠、可复制。私人的愿景，成为一个公共的物件，被陌生人拥有与使用。"],
+ ["07","Civilization","文明","Multiplied by millions, the object reshapes how everyone lives. A thought, having become a thing, becomes a world.","被数百万倍地复制，这物件重塑了每个人的生活方式。一个念头，在成为造物之后，成为了一个世界。"]
+];
+
+var HISTORY=[
+ ["~2.6 Mya","Stone Tools","石器","The first imagined edge — to see a blade hidden inside a stone, then strike it free.","第一道被想象出的刃口——先看见藏在石头里的刀锋，再将它击打出来。"],
+ ["~10,000 BCE","Agriculture","农业","To picture a harvest months away, and plant for a future no one had yet seen.","在脑中描绘数月之后的收成，为一个无人见过的未来播种。"],
+ ["~3000 BCE","Architecture","建筑","Pyramids and temples stood in the mind before they stood on the earth.","金字塔与神庙，在矗立于大地之前，先矗立于心中。"],
+ ["~2000 BCE","Navigation","航海","Sailors held invisible maps of stars and currents, steering toward unseen shores.","水手们持守着星辰与洋流的无形地图，驶向看不见的海岸。"],
+ ["1712","Steam Engine","蒸汽机","Mechanical power imagined as turning thought — coal into motion, motion into empire.","机械动力被想象为流转的思想——煤化为运动，运动化为帝国。"],
+ ["1830s","Electricity","电力","An invisible force, visualized into wires and fields, lit the modern world.","一种无形之力，被视觉化为导线与场——点亮了现代世界。"],
+ ["1940s","Computers","计算机","Logic itself given a body — a machine to hold and run imagined procedures.","逻辑本身被赋予躯体——一台用以持守并运行想象程序的机器。"],
+ ["1990s","Internet","互联网","A nervous system imagined for the whole species, wiring every mind to every other.","一套为整个物种想象出的神经系统，将每一个心智，接入彼此。"],
+ ["2020s","Artificial Intelligence","人工智能","Machines that now imagine alongside us — generating images and ideas of their own.","如今，机器开始与我们一同想象——生成属于它们自己的图像与构想。"]
+];
+
+var FUTURE=[
+ ["🜂","AI-Assisted Design","AI 辅助设计","Describe a vision; watch a machine render thousands of variations of it in seconds.","描述一个愿景，看机器在数秒间，渲染出它的成千上万种变体。","🜂"],
+ ["⌬","Brain–Computer Interfaces","脑机接口","Imagined images read straight from the cortex — the mind's eye, externalized.","直接从皮层读取想象出的图像——心灵之眼，被外化。"],
+ ["◈","Virtual & Mixed Reality","虚拟与混合现实","Step inside your own imagination and walk through it at full scale.","步入你自己的想象，以全尺寸在其中漫步。"],
+ ["⟲","Digital Twins","数字孪生","Living simulations of cities and machines, imagined and updated in real time.","城市与机器的活体模拟，被实时地想象与更新。"],
+ ["✦","Cognitive Augmentation","认知增强","Tools that expand working memory and spatial reach beyond biological limits.","拓展工作记忆与空间触及范围、超越生物极限的工具。"]
+];
+
+var KG=[
+ ["Imagination","想象力",0,0,"#D9A84E","The hidden thread — the capacity to construct and manipulate what is not present.","那根隐线——建构并操控「不在场之物」的能力。"],
+ ["Neuroscience","神经科学",-1,-0.6,"#5BAEFF","Maps how the visual and parietal cortex render and rotate mental images.","描绘视觉与顶叶皮层如何渲染并旋转心智图像。"],
+ ["Psychology","心理学",-1.2,0.3,"#6FB6FF","Measures spatial ability, individual variation, and its trainability.","测量空间能力、个体差异，以及它的可训练性。"],
+ ["Engineering","工程",1,-0.6,"#8FD2FF","Turns mental simulation into tested, buildable machines and systems.","将心智模拟，转化为经检验、可建造的机器与系统。"],
+ ["Architecture","建筑",1.2,0.3,"#A593FF","Translates spatial imagination into inhabitable structures and cities.","将空间想象，转译为可居住的结构与城市。"],
+ ["Physics","物理",0.4,-1.1,"#5FE0A8","Advances through thought experiments — simulations run in pure imagination.","借由思想实验而前进——在纯粹想象中运行的模拟。"],
+ ["Mathematics","数学",-0.4,-1.1,"#7FD4FF","The language for objects the eye can never see — higher dimensions, pure form.","为眼睛永远看不见之物所备的语言——高维度、纯形式。"],
+ ["Design","设计",1.3,1,"#B98CFF","Shapes how imagined objects meet human hands and eyes.","塑造想象之物如何与人的双手和双眼相遇。"],
+ ["Artificial Intelligence","人工智能",0,1.3,"#8FA8FF","Machines that now generate and manipulate imagined images and ideas.","如今能生成并操控想象图像与构想的机器。"],
+ ["Creativity","创造力",-1.3,1,"#FF9FC0","The recombination of mental parts into configurations never seen before.","将心智的零件，重组为从未见过的构型。"],
+ ["Innovation","创新",-0.5,1.25,"#FFB35C","Imagination made real and useful — thought delivered into the world.","被实现且有用的想象——思想被递送进世界。"]
+];
+
+var GUIDE=[
+ ["Can imagination be trained?","想象力可以被训练吗？",
+  "Yes — and the evidence is strong. Spatial skills like mental rotation improve measurably with practice, and the gains transfer to real tasks in engineering, math, and design. Like a muscle, the mind's eye strengthens with use. Video games, sketching, building, and deliberate visualization exercises all reliably raise spatial ability, even in adults.",
+  "可以——而且证据相当有力。心智旋转等空间技能，会随练习而显著提升，且这些收益会迁移到工程、数学与设计中的真实任务上。心灵之眼如同肌肉，越用越强。电子游戏、素描、动手搭建，以及刻意的视觉化练习，都能可靠地提升空间能力——即便对成年人亦然。"],
+ ["Why are some people better at visualization?","为什么有些人更擅长视觉化？",
+  "A mix of genetics, experience, and practice. Brain imaging shows that strong visualizers recruit visual and parietal regions more efficiently. But early exposure matters enormously — childhood play with blocks, maps, and machines builds the circuitry. At the far end sits aphantasia, where people picture nothing at all, and hyperphantasia, where mental images rival real sight. Most of us live between.",
+  "这是遗传、经验与练习的混合。脑成像显示，强视觉化者能更高效地调用视觉与顶叶区域。但早年的接触影响极大——童年时玩积木、地图与机器，会搭建起相应的神经回路。在光谱的一端是「无想象症」（脑中完全无图像），另一端是「超想象症」（心智图像堪比真实视觉）。我们大多数人，活在两者之间。"],
+ ["How did Tesla think?","特斯拉是怎样思考的？",
+  "By his own famous account, Tesla could conjure a machine in his mind in complete detail, set it running, and return weeks later to inspect it for wear — all without a drawing. Whatever the literal truth, it describes an extreme of mental simulation: holding a dynamic 3D model so vivid it could be tested internally. Most engineers do a weaker version of exactly this every day.",
+  "据特斯拉本人著名的自述，他能在脑中以完整的细节召唤出一台机器，让它运转，并在数周后回来检查它的磨损——全程不画一张图。无论字面上是否属实，这都描述了心智模拟的一种极端：持守一个鲜活到足以在内部加以测试的动态三维模型。大多数工程师每天都在做着这件事的较弱版本。"],
+ ["How did da Vinci invent things?","达·芬奇是如何发明的？",
+  "Leonardo fused observation and imagination. He dissected bodies, watched water and birds obsessively, then recombined what he saw into machines centuries premature — helicopters, tanks, robots. His notebooks are externalized imagination: thousands of sketches let his eye refine what his mind proposed. He treated nature as a parts catalogue for invention.",
+  "列奥纳多，将观察与想象融为一体。他解剖尸体，痴迷地观察水流与飞鸟，再把所见之物，重组为早产数个世纪的机器——直升机、坦克、机器人。他的笔记本，正是被外化的想象：成千上万的草图，让他的眼睛去精炼他的心灵所提出之物。他把自然，当作一本供发明取用的零件目录。"],
+ ["How do engineers mentally simulate systems?","工程师如何在心中模拟系统？",
+  "They build a 'mental model' — a simplified internal copy that obeys the system's rules — and run it forward to predict behavior. A mechanical engineer feels the gears mesh; an electrical engineer watches current flow; a programmer traces data through functions. The model is never complete, but it is good enough to catch most failures before anything is built. Expertise is largely the quality of this internal simulator.",
+  "他们建造一个「心智模型」——一份遵循系统规则的、简化的内部副本——并将它向前运行，以预测行为。机械工程师能感觉到齿轮的啮合；电气工程师能看见电流的流动；程序员能追踪数据穿过函数。这个模型从不完整，但已足够好，能在任何东西被建造之前，捕捉到大多数故障。所谓专业，很大程度上，就是这台内部模拟器的质量。"],
+ ["How does the brain construct virtual reality?","大脑如何建构虚拟现实？",
+  "Perception itself is already a controlled hallucination: the brain predicts the world and uses the senses mainly to correct its guesses. Imagination simply runs that same predictive machinery without sensory input — the visual cortex renders, the parietal cortex transforms, working memory holds it steady. Your everyday experience of 'reality' and your mind's eye are built by the same circuits; one is just anchored to incoming light, and the other is not.",
+  "知觉本身，已经是一场受控的幻觉：大脑预测世界，并主要用感官来修正自己的猜测。而想象，不过是在没有感官输入的情况下，运行同一套预测机器——视觉皮层负责渲染，顶叶皮层负责变换，工作记忆负责稳住它。你对「现实」的日常体验，与你的心灵之眼，由同一批回路所建造；区别仅在于，前者被锚定于进入的光线，而后者没有。"]
+];
+
+/* ============ build DOM ============ */
+(function(){var h=document.getElementById("facets");FACETS.forEach(function(f){var d=document.createElement("div");d.className="facet";d.innerHTML=bil(f[0],f[1]);h.appendChild(d);});})();
+(function(){var h=document.getElementById("minds");MINDS.forEach(function(m){var d=document.createElement("div");d.className="mind";
+  var topics=m[7].map(function(tp,k){return '<span>'+bil(tp,m[8][k])+'</span>';}).join("");
+  d.innerHTML='<div class="mind-viz" data-mv="'+m[9]+'"><canvas></canvas></div><div class="idx">'+m[0]+'</div>'+
+    '<div class="mind-body"><h3>'+bil(m[1],m[2])+'</h3><div class="role">'+bil(m[3],m[4])+'</div>'+
+    '<p>'+bil(m[5],m[6])+'</p><div class="topics">'+topics+'</div></div>';
+  h.appendChild(d);});})();
+(function(){var h=document.getElementById("regions");REGIONS.forEach(function(r){var d=document.createElement("div");d.className="region";
+  d.innerHTML='<h4><span class="dot" style="background:'+r[2]+';box-shadow:0 0 8px '+r[2]+'"></span>'+bil(r[0],r[1])+'</h4><p>'+bil(r[3],r[4])+'</p>';h.appendChild(d);});})();
+(function(){var h=document.getElementById("spectrum");SPECTRUM.forEach(function(s){var d=document.createElement("div");d.className="sb";
+  d.innerHTML='<div class="sbn">'+bil(s[0],s[1])+'</div><div class="sbt"><i data-w="'+s[2]+'"></i></div><div class="sbv">'+s[2]+'</div>';h.appendChild(d);});})();
+var flowCur=0;
+(function(){var h=document.getElementById("flow");FLOW.forEach(function(f,i){var d=document.createElement("div");d.className="flow-step"+(i===0?" on":"");
+  d.innerHTML='<div class="fn">'+f[0]+'</div><div class="ft">'+bil(f[1],f[2])+'</div>';d.onclick=function(){flowCur=i;renderFlow(i);};h.appendChild(d);});renderFlow(0);})();
+function renderFlow(i){flowCur=i;document.getElementById("flowDetail").innerHTML=bil(FLOW[i][3],FLOW[i][4]);
+  document.querySelectorAll("#flow .flow-step").forEach(function(b,k){b.classList.toggle("on",k===i);});}
+(function(){var h=document.getElementById("timeline");HISTORY.forEach(function(t){var d=document.createElement("div");d.className="tl-item";
+  d.innerHTML='<span class="nd"></span><div class="yr">'+t[0]+'</div><h4>'+bil(t[1],t[2])+'</h4><p>'+bil(t[3],t[4])+'</p>';h.appendChild(d);});})();
+(function(){var h=document.getElementById("future");FUTURE.forEach(function(f){var d=document.createElement("div");d.className="fcard";
+  d.innerHTML='<div class="fi">'+f[0]+'</div><h4>'+bil(f[1],f[2])+'</h4><p>'+bil(f[3],f[4])+'</p>';h.appendChild(d);});})();
+var curGuide=0;
+(function(){var h=document.getElementById("gqs");GUIDE.forEach(function(g,i){var b=document.createElement("button");b.innerHTML=bil(g[0],g[1]);
+  b.onclick=function(){curGuide=i;renderGuide(i);document.querySelectorAll("#gqs button").forEach(function(x,k){x.classList.toggle("on",k===i);});};h.appendChild(b);});
+  document.querySelector("#gqs button").classList.add("on");renderGuide(0);})();
+function renderGuide(i){var g=GUIDE[i];document.getElementById("gans").innerHTML=
+  '<div class="gb"><i></i><span class="en">Mind Guide · synthesized answer</span><span class="zh">心智向导 · 综合解答</span></div>'+
+  '<h4>'+bil(g[0],g[1])+'</h4><p>'+bil(g[2],g[3])+'</p>'+
+  '<div class="gnote"><span class="en">Curated scientific synthesis — not a live model.</span><span class="zh">精编科学综述——非实时模型。</span></div>';}
+
+/* ============ 3D mini engine (rotation lab + mind vizs) ============ */
+function rot3(p,ax,ay,az){var x=p[0],y=p[1],z=p[2];
+  var cy=Math.cos(ay),sy=Math.sin(ay);var nx=x*cy+z*sy,nz=-x*sy+z*cy;x=nx;z=nz;
+  var cx=Math.cos(ax),sx=Math.sin(ax);var ny=y*cx-z*sx;nz=y*sx+z*cx;y=ny;z=nz;
+  var cz=Math.cos(az),sz=Math.sin(az);var mx=x*cz-y*sz,my=x*sz+y*cz;x=mx;y=my;
+  return [x,y,z];}
+function cubeEdges(){return [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];}
+function cubeVerts(c){var x=c[0],y=c[1],z=c[2],s=0.5;
+  return [[x-s,y-s,z-s],[x+s,y-s,z-s],[x+s,y+s,z-s],[x-s,y+s,z-s],[x-s,y-s,z+s],[x+s,y-s,z+s],[x+s,y+s,z+s],[x-s,y+s,z+s]];}
+/* generate a chiral chain of cubes (Shepard–Metzler style) */
+function genShape(seed){
+  var rnd=function(){seed=(seed*9301+49297)%233280;return seed/233280;};
+  var cubes=[[0,0,0]];var dir=[1,0,0];var pos=[0,0,0];var dirs=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+  var turns=0;
+  for(var i=0;i<7;i++){
+    if(i===2||i===4||(rnd()>0.6&&turns<3)){ // turn into a perpendicular axis (creates chirality)
+      var nd;do{nd=dirs[Math.floor(rnd()*6)];}while(Math.abs(nd[0])===Math.abs(dir[0])&&Math.abs(nd[1])===Math.abs(dir[1])&&Math.abs(nd[2])===Math.abs(dir[2]));
+      dir=nd;turns++;
+    }
+    pos=[pos[0]+dir[0],pos[1]+dir[1],pos[2]+dir[2]];cubes.push(pos.slice());
+  }
+  // center
+  var cx=0,cy=0,cz=0;cubes.forEach(function(c){cx+=c[0];cy+=c[1];cz+=c[2];});cx/=cubes.length;cy/=cubes.length;cz/=cubes.length;
+  return cubes.map(function(c){return [c[0]-cx,c[1]-cy,c[2]-cz];});
+}
+function drawShape(x,cx,cy,scale,cubes,ax,ay,az,mirror,col,lw){
+  x.lineWidth=lw||1.4;x.strokeStyle=col;
+  var E=cubeEdges();
+  for(var ci=0;ci<cubes.length;ci++){var c=cubes[ci];if(mirror)c=[-c[0],c[1],c[2]];
+    var vs=cubeVerts(c).map(function(v){var vv=mirror?[-v[0],v[1],v[2]]:v;
+      // note: mirror already applied to c, but verts built around c need consistent reflection; rebuild around reflected center
+      return v;});
+    // build verts around (already reflected) center c, then rotate
+    var verts=cubeVerts(c).map(function(v){return rot3(v,ax,ay,az);});
+    for(var e=0;e<E.length;e++){var a=verts[E[e][0]],b=verts[E[e][1]];
+      x.beginPath();x.moveTo(cx+a[0]*scale,cy-a[1]*scale);x.lineTo(cx+b[0]*scale,cy-b[1]*scale);x.stroke();}
+  }
+  // node dots at cube centers
+  for(var ci2=0;ci2<cubes.length;ci2++){var c2=cubes[ci2];if(mirror)c2=[-c2[0],c2[1],c2[2]];var p=rot3(c2,ax,ay,az);
+    x.fillStyle=col;x.globalAlpha=0.5;x.beginPath();x.arc(cx+p[0]*scale,cy-p[1]*scale,2,0,TAU);x.fill();x.globalAlpha=1;}
+}
+
+/* ============ ROTATION LAB ============ */
+var rotShape=null,rotIsMirror=false,rotBaseRot=[0,0,0],rotCandRot=[0,0,0],rotSeed=12345;
+var rotStreak=0,rotN=0,rotCorrect=0,rotAnswered=false;
+function newRotTrial(){
+  rotSeed=(rotSeed*1103515245+12345)&0x7fffffff;
+  rotShape=genShape(rotSeed%100000+7);
+  rotIsMirror=Math.random()<0.5;
+  rotBaseRot=[Math.random()*TAU,Math.random()*TAU,0];
+  rotCandRot=[rotBaseRot[0]+ (Math.random()-0.5)*2, rotBaseRot[1]+ (Math.random()*2.4-1.2), (Math.random()-0.5)*1.2];
+  rotAnswered=false;
+  var q=document.getElementById("rotQ");if(q)q.innerHTML=bil("Trial "+(rotN+1)+" — study both, then choose.","第 "+(rotN+1)+" 试 — 仔细观察两者，再做选择。");
+  var fb=document.getElementById("rotFb");if(fb){fb.textContent="";fb.className="lab-feedback";}
+}
+function rotAnswer(saidSame){
+  if(rotAnswered){return;}
+  rotAnswered=true;rotN++;
+  var correct=(saidSame === !rotIsMirror);
+  if(correct){rotCorrect++;rotStreak++;}else{rotStreak=0;}
+  var fb=document.getElementById("rotFb");
+  var truth=rotIsMirror?(lang==="en"?"It was a MIRROR — no rotation could align them.":"这是镜像——任何旋转都无法使其对齐。"):(lang==="en"?"They were the SAME object.":"它们是同一个物体。");
+  fb.className="lab-feedback "+(correct?"ok":"no");
+  fb.textContent=(correct?(lang==="en"?"✓ Correct. ":"✓ 正确。"):(lang==="en"?"✗ Not quite. ":"✗ 差一点。"))+truth;
+  document.getElementById("rotStreak").textContent=rotStreak;
+  document.getElementById("rotN").textContent=rotN;
+  document.getElementById("rotAcc").textContent=Math.round(rotCorrect/rotN*100)+"%";
+  setTimeout(newRotTrial,1900);
+}
+function initRot(){
+  var cv=document.getElementById("rotCanvas");var x=cv.getContext("2d");var w,h,dpr=Math.min(devicePixelRatio||1,2),vis=false;
+  function sz(){w=cv.clientWidth;h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);}
+  sz();window.addEventListener("resize",sz);
+  new IntersectionObserver(function(e){vis=e[0].isIntersecting;}).observe(cv);
+  newRotTrial();
+  function frame(t){
+    if(vis&&rotShape){x.clearRect(0,0,w,h);var spin=reduce?0:t*0.0004;var sc=Math.min(w*0.5,h)*0.16;
+      drawShape(x,w*0.26,h*0.5,sc,rotShape,rotBaseRot[0]+spin,rotBaseRot[1]+spin*0.7,rotBaseRot[2],false,rgba(C.blue[0],C.blue[1],C.blue[2],0.9),1.5);
+      drawShape(x,w*0.74,h*0.5,sc,rotShape,rotCandRot[0]+spin,rotCandRot[1]+spin*0.7,rotCandRot[2],rotIsMirror,rgba(C.sepia[0],C.sepia[1],C.sepia[2],0.92),1.5);
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ============ MIND mini-vizs ============ */
+function initMindVizs(){
+  document.querySelectorAll(".mind-viz").forEach(function(box){
+    var cv=box.querySelector("canvas");var x=cv.getContext("2d");var type=box.getAttribute("data-mv");
+    var w,h,dpr=Math.min(devicePixelRatio||1,2),vis=false,seed=type.length*97+13;
+    function sz(){w=cv.clientWidth;h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);}
+    sz();window.addEventListener("resize",sz);
+    new IntersectionObserver(function(e){vis=e[0].isIntersecting;}).observe(cv);
+    var shape=genShape(seed);
+    function frame(t){ if(vis){x.clearRect(0,0,w,h); MV(type,x,w,h,t,shape,seed);} requestAnimationFrame(frame); }
+    requestAnimationFrame(frame);
+  });
+}
+function MV(type,x,w,h,t,shape,seed){
+  var A=C.blue,cx=w/2,cy=h/2;var sp=reduce?0:t*0.0004;
+  if(type==="invent"||type==="engineer"||type==="future"){
+    drawShape(x,cx,cy,Math.min(w,h)*0.13,shape,sp,sp*0.8,0,false,rgba(A[0],A[1],A[2],0.8),1.2);
+  } else if(type==="davinci"){ // flying-machine wings + circle (Vitruvian nod)
+    x.strokeStyle=rgba(C.sepia[0],C.sepia[1],C.sepia[2],0.7);x.lineWidth=1.1;
+    x.beginPath();x.arc(cx,cy,Math.min(w,h)*0.32,0,TAU);x.stroke();
+    for(var s=-1;s<=1;s+=2){x.beginPath();for(var a=0;a<=10;a++){var ang=a/10*1.1; var r=Math.min(w,h)*0.34*(1-a/14);
+      var px=cx+s*Math.cos(ang)*r, py=cy- Math.sin(ang)*r*0.7 - Math.sin(t*0.002+s)*4; a===0?x.moveTo(cx,cy):x.lineTo(px,py);}x.stroke();}
+    x.fillStyle=rgba(C.sepia[0],C.sepia[1],C.sepia[2],0.9);x.beginPath();x.arc(cx,cy,3,0,TAU);x.fill();
+  } else if(type==="tesla"){ // field lines + coil
+    for(var i=0;i<6;i++){var r=10+i*Math.min(w,h)*0.06;x.strokeStyle=rgba(C.blue[0],C.blue[1],C.blue[2],0.4-i*0.05);x.lineWidth=1;
+      x.beginPath();x.ellipse(cx,cy,r,r*0.55,Math.sin(t*0.001+i)*0.5,0,TAU);x.stroke();}
+    var sp2=(Math.sin(t*0.004)+1)/2;x.fillStyle=rgba(C.neuro[0],C.neuro[1],C.neuro[2],0.6+sp2*0.4);x.beginPath();x.arc(cx,cy,3+sp2*3,0,TAU);x.fill();
+  } else if(type==="architect"||type==="city"){ // blueprint buildings
+    var base=h*0.78;x.strokeStyle=rgba(C.blue[0],C.blue[1],C.blue[2],0.5);x.lineWidth=1;
+    x.beginPath();x.moveTo(0,base);x.lineTo(w,base);x.stroke();
+    for(var i=0;i<8;i++){var bw=w/11,bx=w*0.12+i*bw*1.1,bh=14+((i*53+seed)%60);
+      x.strokeRect(bx,base-bh,bw,bh);
+      if((i+Math.floor(t*0.002))%3===0){x.fillStyle=rgba(C.sepia[0],C.sepia[1],C.sepia[2],0.5);x.fillRect(bx+2,base-bh+2,bw-4,3);}}
+  } else if(type==="scientist"){ // light beam + orbit
+    x.strokeStyle=rgba(C.sepia[0],C.sepia[1],C.sepia[2],0.6);x.lineWidth=1.2;
+    x.beginPath();x.moveTo(0,cy);x.lineTo(w,cy- (Math.sin(t*0.002)*8));x.stroke();
+    var px=(t*0.08)%w;x.fillStyle=rgba(C.bluebr[0],C.bluebr[1],C.bluebr[2],0.9);x.fillRect(px,cy-2,8,2);
+    x.strokeStyle=rgba(C.blue[0],C.blue[1],C.blue[2],0.4);x.beginPath();x.ellipse(cx,cy,w*0.22,h*0.2,0,0,TAU);x.stroke();
+  } else if(type==="chess"){ // branching tree
+    function branch(px,py,ang,len,d){if(d>4||len<6)return;var ex=px+Math.cos(ang)*len,ey=py+Math.sin(ang)*len;
+      x.strokeStyle=rgba(C.blue[0],C.blue[1],C.blue[2],0.5-d*0.08);x.lineWidth=1;x.beginPath();x.moveTo(px,py);x.lineTo(ex,ey);x.stroke();
+      branch(ex,ey,ang-0.4,len*0.7,d+1);branch(ex,ey,ang+0.4,len*0.7,d+1);}
+    branch(cx,h*0.9,-Math.PI/2,h*0.22,0);
+  } else if(type==="programmer"){ // nested boxes / nodes
+    for(var i=0;i<4;i++){x.strokeStyle=rgba(C.blue[0],C.blue[1],C.blue[2],0.5-i*0.1);x.lineWidth=1;
+      var s=Math.min(w,h)*(0.4-i*0.08);x.strokeRect(cx-s/2,cy-s/2,s,s);}
+    for(var i=0;i<5;i++){var a=i/5*TAU+t*0.001;x.fillStyle=rgba(C.neuro[0],C.neuro[1],C.neuro[2],0.7);
+      x.beginPath();x.arc(cx+Math.cos(a)*w*0.18,cy+Math.sin(a)*h*0.22,2.4,0,TAU);x.fill();}
+  } else {
+    drawShape(x,cx,cy,Math.min(w,h)*0.13,shape,sp,sp*0.8,0,false,rgba(A[0],A[1],A[2],0.8),1.2);
+  }
+}
+
+/* ============ HERO morph (machine → neurons → brain) ============ */
+var hc=document.getElementById("hero-c"),hx=hc.getContext("2d");
+var HW=0,HH=0,HDPR=Math.min(devicePixelRatio||1,2);
+var parts=[],stage=0,stageT=0;
+var STAGES=["machine","scatter","neurons","brain"];
+var stageNames={machine:["The Machine","机器"],scatter:["Dissolving…","消散…"],neurons:["The Neurons","神经元"],brain:["The Mind","心智"]};
+function hResize(){HW=innerWidth;HH=innerHeight;hc.width=HW*HDPR;hc.height=HH*HDPR;hc.style.width=HW+"px";hc.style.height=HH+"px";hx.setTransform(HDPR,0,0,HDPR,0,0);
+  if(parts.length===0){var N=Math.min(260,Math.floor(HW*HH/7000));for(var i=0;i<N;i++)parts.push({x:Math.random()*HW,y:Math.random()*HH,tx:0,ty:0,i:i,n:Math.random()});}
+  setTargets();}
+function setTargets(){
+  var cx=HW*0.5,cy=HH*0.46,R=Math.min(HW,HH)*0.26,N=parts.length;
+  for(var i=0;i<N;i++){var p=parts[i],f=i/N,ang=f*TAU;
+    if(STAGES[stage]==="machine"){ // concentric gear rings + spokes
+      var ring=i%3, rr=R*(0.4+ring*0.3); var teeth=Math.sin(ang*12)*R*0.04;
+      p.tx=cx+Math.cos(ang+stageT*0.0002)*(rr+teeth);p.ty=cy+Math.sin(ang+stageT*0.0002)*(rr+teeth);
+    } else if(STAGES[stage]==="scatter"){ p.tx=cx+(p.n-0.5)*HW*0.9;p.ty=cy+(((i*53)%100)/100-0.5)*HH*0.8; }
+    else if(STAGES[stage]==="neurons"){ p.tx=cx+(Math.cos(i*2.39)* (0.3+ (i%7)/7)*R*1.4);p.ty=cy+(Math.sin(i*2.39)*(0.3+(i%5)/5)*R*1.1); }
+    else if(STAGES[stage]==="brain"){ var bp=brainPoint(f,i);p.tx=cx+bp[0]*R*1.5;p.ty=cy+bp[1]*R*1.5; }
+  }
+}
+function brainPoint(f,i){ // rough brain silhouette: two lobes + folds
+  var a=f*TAU; var lobe=(i%2)?1:-1;
+  var rx=0.62+0.12*Math.sin(a*3)+0.05*Math.sin(a*7);
+  var x=Math.cos(a)*rx*0.8;var y=-Math.sin(a)*0.62 - 0.08;
+  // flatten bottom, bump top
+  if(y>0.2)y=0.2+(y-0.2)*0.4;
+  x+=lobe*0.04*Math.sin(a*5);
+  return [x,y];
+}
+function hLoop(t){
+  stageT=t;
+  if(!reduce){ if(t - (hLoop._last||0) > 3400){ hLoop._last=t; stage=(stage+1)%STAGES.length; setTargets();
+    var sl=document.getElementById("stageLabel"); if(sl){var nm=stageNames[STAGES[stage]];sl.textContent=(lang==="en"?nm[0]:nm[1]);} } }
+  hx.clearRect(0,0,HW,HH);
+  var st=STAGES[stage];
+  // links for neuron/brain
+  if(st==="neurons"||st==="brain"){
+    for(var i=0;i<parts.length;i+=2){for(var j=i+1;j<Math.min(i+8,parts.length);j++){
+      var dx=parts[i].x-parts[j].x,dy=parts[i].y-parts[j].y,dd=dx*dx+dy*dy;
+      if(dd<7000){var col=st==="brain"?C.neuro:C.blue;hx.strokeStyle=rgba(col[0],col[1],col[2],0.05*(1-dd/7000));hx.lineWidth=0.7;
+        hx.beginPath();hx.moveTo(parts[i].x,parts[i].y);hx.lineTo(parts[j].x,parts[j].y);hx.stroke();}}}
+  }
+  // machine spokes
+  if(st==="machine"){var cx=HW*0.5,cy=HH*0.46;hx.strokeStyle=rgba(C.blue[0],C.blue[1],C.blue[2],0.06);hx.lineWidth=0.8;
+    for(var k=0;k<12;k++){var a=k/12*TAU+t*0.0002;hx.beginPath();hx.moveTo(cx,cy);hx.lineTo(cx+Math.cos(a)*Math.min(HW,HH)*0.26,cy+Math.sin(a)*Math.min(HW,HH)*0.26);hx.stroke();}}
+  for(var i=0;i<parts.length;i++){var p=parts[i];p.x+=(p.tx-p.x)*0.05;p.y+=(p.ty-p.y)*0.05;
+    var col=st==="brain"?C.neuro:(st==="machine"?C.blue:(st==="scatter"?[120,140,180]:C.bluebr));
+    var tw=0.4+Math.sin(t*0.003+p.i)*0.3+0.3;
+    hx.fillStyle=rgba(col[0],col[1],col[2],clamp(tw,0.1,0.9)*0.85);
+    var sz=st==="machine"?1.6:2;hx.beginPath();hx.arc(p.x,p.y,sz,0,TAU);hx.fill();}
+  requestAnimationFrame(hLoop);
+}
+
+/* ============ KNOWLEDGE GRAPH ============ */
+var kgActive=-1;
+function initKG(){
+  var cv=document.getElementById("kg");var x=cv.getContext("2d");var w,h,dpr=Math.min(devicePixelRatio||1,2);
+  var rot=0,dragX=null,nodes=[];
+  function sz(){w=cv.clientWidth;h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);build();}
+  function build(){nodes=KG.map(function(k,i){return {i:i,bx:k[2],by:k[3],x:0,y:0,col:hexToRgb(k[4])};});}
+  sz();window.addEventListener("resize",sz);
+  var mx=-999,my=-999;
+  cv.addEventListener("pointermove",function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;
+    if(dragX!==null){rot+=(e.clientX-dragX)*0.005;dragX=e.clientX;}
+    var best=-1,bd=1e9;for(var i=0;i<nodes.length;i++){var dx=mx-nodes[i].x,dy=my-nodes[i].y,dd=dx*dx+dy*dy;if(dd<700&&dd<bd){bd=dd;best=i;}}
+    if(best>=0){kgActive=best;kgReadout(best);}cv.style.cursor=best>=0?"pointer":"grab";});
+  cv.addEventListener("pointerdown",function(e){dragX=e.clientX;cv.setPointerCapture(e.pointerId);});
+  cv.addEventListener("pointerup",function(){dragX=null;});
+  cv.addEventListener("pointerleave",function(){mx=-999;my=-999;});
+  function frame(t){
+    if(!reduce)rot+=0.0012;
+    x.clearRect(0,0,w,h);var cx=w/2,cy=h/2,sc=Math.min(w,h)*0.32;
+    for(var i=0;i<nodes.length;i++){var n=nodes[i];
+      if(i===0){n.x=cx;n.y=cy;}
+      else{var ca=Math.cos(rot),sa=Math.sin(rot);var bx=n.bx*ca-n.by*sa,by=n.bx*sa+n.by*ca;
+        n.x=cx+bx*sc;n.y=cy+by*sc*0.82;}}
+    // edges: all to center + a few cross links
+    for(var i=1;i<nodes.length;i++){var a=nodes[0],b=nodes[i];var hot=(kgActive===i||kgActive===0);
+      x.strokeStyle=rgba(C.blue[0],C.blue[1],C.blue[2],hot?0.4:0.12);x.lineWidth=hot?1.4:0.8;
+      x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();
+      var tt=(t*0.0004+i*0.15)%1;x.fillStyle=rgba(C.bluebr[0],C.bluebr[1],C.bluebr[2],0.6);
+      x.beginPath();x.arc(a.x+(b.x-a.x)*tt,a.y+(b.y-a.y)*tt,1.4,0,TAU);x.fill();}
+    var cross=[[1,6],[3,4],[8,7],[9,10],[2,1],[5,6]];
+    for(var c=0;c<cross.length;c++){var a=nodes[cross[c][0]],b=nodes[cross[c][1]];
+      x.strokeStyle=rgba(C.neuro[0],C.neuro[1],C.neuro[2],0.08);x.lineWidth=0.7;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}
+    // nodes
+    for(var i=0;i<nodes.length;i++){var n=nodes[i],k=KG[i];var hot=(kgActive===i);var isC=(i===0);
+      var rad=isC?12:(hot?9:6.5);var pulse=(Math.sin(t*0.002+i)+1)/2;
+      var g=x.createRadialGradient(n.x,n.y,0,n.x,n.y,rad*2.6);g.addColorStop(0,rgba(n.col[0],n.col[1],n.col[2],hot?0.6:0.35));g.addColorStop(1,rgba(n.col[0],n.col[1],n.col[2],0));
+      x.fillStyle=g;x.beginPath();x.arc(n.x,n.y,rad*2.6,0,TAU);x.fill();
+      x.fillStyle=rgba(n.col[0],n.col[1],n.col[2],1);x.beginPath();x.arc(n.x,n.y,rad+(isC?pulse*2:0),0,TAU);x.fill();
+      x.fillStyle=rgba(255,255,255,hot||isC?1:0.7);x.font=(isC?"600 13px":(hot?"600 12px":"400 11px"))+" 'Space Grotesk',sans-serif";
+      x.textAlign="center";x.textBaseline="middle";x.fillText((lang==="en"?k[0]:k[1]),n.x,n.y-rad-9);}
+    requestAnimationFrame(frame);
+  }
+  kgActive=0;kgReadout(0);requestAnimationFrame(frame);
+}
+function kgReadout(i){var k=KG[i];document.getElementById("kgReadout").innerHTML='<h4 style="color:'+k[4]+'">'+(lang==="en"?k[0]:k[1])+'</h4><p>'+(lang==="en"?k[5]:k[6])+'</p>';}
+
+/* ============ BRAIN regions canvas ============ */
+function initBrain(){
+  var cv=document.getElementById("brainCanvas");var x=cv.getContext("2d");var w,h,dpr=Math.min(devicePixelRatio||1,2),vis=false;
+  function sz(){w=cv.clientWidth;h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0);}
+  sz();window.addEventListener("resize",sz);
+  new IntersectionObserver(function(e){vis=e[0].isIntersecting;}).observe(cv);
+  var pts=[];for(var i=0;i<70;i++){var a=i/70*TAU;var bp=brainPoint(i/70,i);pts.push({x:bp[0],y:bp[1]});}
+  var cols=REGIONS.map(function(r){return hexToRgb(r[2]);});
+  function frame(t){if(vis){x.clearRect(0,0,w,h);var cx=w/2,cy=h/2,sc=Math.min(w,h)*0.4;
+    // outline
+    x.strokeStyle=rgba(C.blue[0],C.blue[1],C.blue[2],0.25);x.lineWidth=1.2;x.beginPath();
+    for(var i=0;i<pts.length;i++){var px=cx+pts[i].x*sc,py=cy+pts[i].y*sc;i===0?x.moveTo(px,py):x.lineTo(px,py);}x.closePath();x.stroke();
+    // region blooms
+    var spots=[[-0.45,0.15],[0.4,-0.05],[-0.15,-0.4],[0.15,0.25],[0.05,0.35]];
+    for(var r=0;r<spots.length;r++){var p=(Math.sin(t*0.0015+r*1.3)+1)/2;var col=cols[r];
+      var gx=cx+spots[r][0]*sc,gy=cy+spots[r][1]*sc;
+      var g=x.createRadialGradient(gx,gy,0,gx,gy,30+p*16);g.addColorStop(0,rgba(col[0],col[1],col[2],0.5+p*0.3));g.addColorStop(1,rgba(col[0],col[1],col[2],0));
+      x.fillStyle=g;x.beginPath();x.arc(gx,gy,30+p*16,0,TAU);x.fill();
+      x.fillStyle=rgba(col[0],col[1],col[2],0.9);x.beginPath();x.arc(gx,gy,3,0,TAU);x.fill();}
+    // sparks
+    for(var i=0;i<14;i++){var a=t*0.001+i;var rr=(i%5)/5;var px=cx+Math.cos(a)*sc*0.5*rr,py=cy+Math.sin(a*1.3)*sc*0.45*rr;
+      x.fillStyle=rgba(C.bluebr[0],C.bluebr[1],C.bluebr[2],0.4);x.beginPath();x.arc(px,py,1.3,0,TAU);x.fill();}
+  }requestAnimationFrame(frame);}
+  requestAnimationFrame(frame);
+}
+
+/* ============ reveal + spectrum + timeline observers ============ */
+function watchReveal(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll(".reveal").forEach(function(r){io.observe(r);});
+  var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+    e.target.querySelectorAll("[data-w]").forEach(function(b){b.style.width=b.getAttribute("data-w")+"%";});io2.unobserve(e.target);}});},{threshold:0.2});
+  var sp=document.getElementById("spectrum");if(sp)io2.observe(sp);
+  var io3=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("in");});},{threshold:0.3});
+  document.querySelectorAll(".tl-item").forEach(function(t){io3.observe(t);});
+}
+
+/* ============ loader + boot ============ */
+window.addEventListener("load",function(){setTimeout(function(){document.getElementById("loader").classList.add("gone");},1500);});
+setTimeout(function(){document.getElementById("loader").classList.add("gone");},2600);
+window.addEventListener("resize",hResize);
+hResize();
+initRot();
+initMindVizs();
+initBrain();
+initKG();
+watchReveal();
+setLang("en");
+requestAnimationFrame(hLoop);
+</script>
+
+<!-- Analytics -->
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+</body>
+</html>
